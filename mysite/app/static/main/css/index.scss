@@ -1,0 +1,53 @@
+body {
+    background-color: rgb(241, 241, 241);
+}
+.content {
+    height: 400px;
+    width: 350px;
+    margin: auto;
+    background-color: white;
+    border: rgb(235, 235, 235) solid 3px;
+    text-align: center;
+}
+.content2 {
+    width: 350px;
+    margin: auto;
+    background-color: white;
+    border: rgb(235, 235, 235) solid 3px;
+    text-align: center;
+}
+.conten2 > p {
+    vertical-align: middle;
+}
+#id_username,
+#id_password,
+#id_retype_password {
+    height: 25px;
+    width: 75%;
+    background-color: rgb(208, 223, 252);
+    border-radius: 5px;
+    margin: 2px 0;
+}
+.button {
+    height: 30px;
+    width: 75%;
+    background-color: cornflowerblue;
+    color: white;
+    font-size: 14px;
+    border-radius: 5px;
+}
+.or {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.or:before,
+.or:after {
+    content: "";
+    flex-grow: 1;
+    height: 1px;
+    display: block;
+    background: #444;
+    margin: 0 0.8em;
+}

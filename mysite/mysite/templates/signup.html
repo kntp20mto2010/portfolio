@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block style %}
+{% endblock %}
+{% block base_content %}
+<div class='login'>
+    <div class='curtain'>
+    </div>
+    <div class='login__wrapper'>
+        <div class='login__title left-to-right'>
+            <h1>Foodgram</h1>
+            <p>〜2020〜</p>
+        </div>
+        <div class='login__container down-to-top'>
+            <h2>Foodgram</h2>
+            <form action="" method="POST">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="login__form-group">
+                    {{ field }}
+                </div>
+                {% endfor %}
+
+                {% for error in form.non_field_errors %}
+                <div class="alert" role="alert">
+                    <p>{{ error }}</p>
+                </div>
+                {% endfor %}
+                <button type="submit" class="button">登録する</button>
+            </form>
+            <div class='login__register'>
+                <a href="{% url 'myaccounts:login' %}">ログイン</a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    $('.curtain').fadeIn(2000);
+    $('.down-to-top,.left-to-right').each(function () {
+        var elemPos = $(this).offset().top;
+        var scroll = $(window).scrollTop();
+        var windowHeight = $(window).height();
+        if (scroll > elemPos - windowHeight + 150) {
+            $(this).delay(1000).queue(function () {
+                $(this).addClass('scrollin');
+            });
+        }
+    });
+
+</script>
+<!-- <script type="text/javascript" src="{% static 'main/jquery.textFx.js' %}"></script>
+<script type="text/javascript" src="{% static 'main/jquery.transit.js' %}"></script> -->
+{% endblock %}

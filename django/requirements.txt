@@ -1,0 +1,9 @@
+uwsgi
+Django
+libsass
+django-compressor
+django-sass-processor
+mysqlclient
+pymysql
+pillow
+social-auth-app-django

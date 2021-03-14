@@ -1,0 +1,204 @@
+{% extends 'baseWithNav.html' %}
+{% load static %}
+{% load sass_tags %}
+{% block style %}
+<link rel="stylesheet" href="{% sass_src 'main/css/site.scss' %}" />
+{% endblock %}
+{% block content %}
+<div class='popup loading is-hide'>
+
+</div>
+<div class='success is-hide'>
+</div>
+<div class="dialog ">
+    <div class='dialog__wrapper'>
+        <div class='dialog__title'>
+        </div>
+        <div class='dialog__container'>
+            <img class="dialog__image" alt="画像が見つかりません">
+            <div class='dialog__comment-container'>
+                <div class='dialog__friends'>
+                    <div class='dialog__friend'>
+                        <div class='dialog__friend-profile'>
+                            <button class='dialog__friend-button' type='submit'><img class='dialog__friend-image'
+                                    src='/static/media/profile/model1.png'></button>
+                            <div class='dialog__friend-name'>namefdsafasd</div>
+                        </div>
+                        <div class='dialog__friend-comment'>
+                            あfjdなsfb;えkwqlfbjくぇrklbfjけrlqbんjfk
+                        </div>
+                    </div>
+                </div>
+                <form class='dialog__form' action="{% url 'search' %}" method='POST'>
+                    {% csrf_token %}
+                    <textarea class='dialog__comment' name='comment' rows='4' cols='40'
+                        placeholder='ここに感想を記入してください｡'></textarea>
+                    <input class='dialog__input' name='good'>
+                    <button class='dialog__submit' type='submit'>投稿する</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class='dialog__close-button'>
+        <i class='fa fa-close'></i>
+    </div>
+</div>
+<ul>
+    {% for place_id,person_num in results.items %}
+    <script>
+        window.addEventListener('load', function () {
+            var place_id = "{{ place_id }}"
+            var person_num = "{{ person_num }}"
+            showPlace(place_id, parseFloat(person_num))
+        });
+    </script>
+    {% endfor %}
+</ul>
+
+<div class='content'>
+    <div class='long_wrapper'>
+        <div class='friend'>
+            <div class='friend__container'>
+                <form class='friend__form' action='{% url "favorite" %}' method='POST'>
+                    {% csrf_token %}
+                    <input class='friend__input' name='user_button' value='1'>
+                    <button class='friend__button' type='submit'><img class='friend__image'
+                            src='/static/media/profile/model1.png'></button>
+                    <p class='friend__name'>namefdsafasd</p>
+                </form>
+            </div>
+            <div class='friend__container'>
+                <button class='friend__button' name='user_button' type='submit'><img class='friend__image'
+                        src='/static/media/profile/model2.png'></button>
+                <p class='friend__name'>namefdsafasd</p>
+            </div>
+            <div class='friend__container'>
+                <button class='friend__button' type='submit'><img class='friend__image'
+                        src='/static/media/profile/model3.png'></button>
+                <p class='friend__name'>namefdsafasd</p>
+            </div>
+            <div class='friend__container'>
+                <button class='friend__button' type='submit'><img class='friend__image'
+                        src='/static/media/profile/model4.png'></button>
+                <p class='friend__name'>namefdsafasd</p>
+            </div>
+            <div class='friend__container'>
+                <button class='friend__button' type='submit'><img class='friend__image'
+                        src='/static/media/profile/model5.png'></button>
+                <p class='friend__name'>namefdsafasd</p>
+            </div>
+        </div>
+
+        </form>
+        <div class="map">
+
+        </div>
+        <div class='nav__search-container'>
+            <form class='nav__search-form' action="/ajax/" method="POST">
+                {% csrf_token %}
+                <input class="nav__search-input" type='search' name='search' placeholder="&#xf002 検索">
+        </div>
+    </div>
+</div>
+
+<!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtcFEP6NzAHWBHySPAkD_E3Ua4mFx2fOY
+    &callback=initMap&libraries=places&v=weekly" async></script>
+
+<!-- ラベル付きマーカーを表示するライブラリ -->
+<script src="https://unpkg.com/@googlemaps/markerwithlabel/dist/index.min.js"></script>
+<script>
+    $(document).on('click', function (e) {
+        if (!$(e.target).closest('.dialog__container').length) {
+            // ターゲット要素の外側をクリックした時の操作
+            $(".dialog").hide()
+            $('.dialog__comment').val('');
+        }
+    });
+    $(function () {
+        $(".dialog__form").submit(function (event) {
+            console.log('ダイアログのajax処理を始めます')
+            event.preventDefault();
+            var form = $(this);
+            $.ajax({
+                url: form.prop('action'),
+                method: form.prop('method'),
+                data: form.serialize(),
+                timeout: 10000,
+                dataType: 'json',
+
+                //リクエストが完了するまで実行される
+                beforeSend: function () {
+                    $('.loading').removeClass('is-hide');
+                }
+            })
+                .done(function (data) {
+                    console.log('done');
+                    for (key in data) {
+                        console.log(key)
+                        var place_id = key;
+                        var person_num = data[key];
+                        showPlace(place_id, parseFloat(person_num));
+                    }
+                }).fail(function (data) {
+                    alert('fail');
+                }).always(function (data) {
+                    console.log('always');
+                    $('.loading').delay(2000).queue(function () {
+                        console.log('delay');
+                        $(this).addClass("is-hide").dequeue();
+                        $('.success').removeClass('is-hide');
+                        var timestamp = new Date().getTime();
+                        var path = '/static/media/success.gif' + '?' + timestamp
+                        path = 'url(' + path + ')'
+                        $('.success').css('background-image', path);
+                        // $('.success').fadeIn(200);
+                        $('.success').delay(3000).queue(function () {
+                            $('.success').addClass('is-hide').dequeue();
+                            $('.dialog').hide();
+                        });
+                    });
+                    $('.dialog__comment').val('');
+                });
+        });
+
+        $('.friend__form').submit(function (event) {
+            event.preventDefault();
+            var form = $(this);
+            $.ajax(
+                {
+                    url: form.prop('action'),
+                    method: form.prop('method'),
+                    data: form.serialize(),
+                    dataType: 'json',
+                    timeout: 10000,
+
+                    beforeSend: function () {
+                        $(".loading").removeClass('is-hide');
+                    }
+                }
+            ).done(function (data) {
+                saveResult(data);
+                show();
+                // for (key in data) {
+                //     var place_id = key;
+                //     var comment = data[key];
+                //     showPlace(place_id, 1);
+                //     console.log(place_id);
+                // }
+            }).fail(function (data) {
+                alert('fail')
+            }).always(function (data) {
+                console.log('always');
+                $('.loading').delay(2000).queue(function () {
+                    console.log('delay');
+                    $(this).addClass("is-hide").dequeue();
+                });
+            });
+        });
+    });
+
+</script>
+
+
+{% endblock %}

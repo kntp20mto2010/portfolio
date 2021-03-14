@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+{% load sass_tags %}
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <title>FoodFriends</title>
+    {% block style %}
+    {% endblock %}
+    <script src="https://kit.fontawesome.com/0aa33c3446.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="{% sass_src 'main/css/reset.scss' %}" />
+    <link rel="stylesheet" href="{% sass_src 'main/css/site.scss' %}" />
+    <link rel='icon' type='image/png' href="{% static 'favicon.ico' %}">
+    <script type='text/javascript' src=" {% static 'main/main.js' %}">
+    </script>
+</head>
+
+<body>
+    <div class='background'>
+        <div class='background__column1'></div>
+        <div class='background__column2'></div>
+        <div class='background__column3'></div>
+        <div class='background__column4'></div>
+        <div class='background__column5'></div>
+    </div>
+
+    {% block base_content %}
+    {% endblock %}
+</body>
+
+</html>
