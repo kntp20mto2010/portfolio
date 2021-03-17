@@ -56,53 +56,43 @@
 </ul>
 
 <div class='content'>
-    <div class='long_wrapper'>
-        <div class='friend'>
-            <div class='friend__container'>
-                <form class='friend__form' action='{% url "favorite" %}' method='POST'>
-                    {% csrf_token %}
-                    <input class='friend__input' name='user_button' value='1'>
-                    <button class='friend__button' type='submit'><img class='friend__image'
-                            src='/static/media/profile/model1.png'></button>
-                    <p class='friend__name'>namefdsafasd</p>
-                </form>
-            </div>
-            <div class='friend__container'>
-                <button class='friend__button' name='user_button' type='submit'><img class='friend__image'
-                        src='/static/media/profile/model2.png'></button>
-                <p class='friend__name'>namefdsafasd</p>
-            </div>
-            <div class='friend__container'>
-                <button class='friend__button' type='submit'><img class='friend__image'
-                        src='/static/media/profile/model3.png'></button>
-                <p class='friend__name'>namefdsafasd</p>
-            </div>
-            <div class='friend__container'>
-                <button class='friend__button' type='submit'><img class='friend__image'
-                        src='/static/media/profile/model4.png'></button>
-                <p class='friend__name'>namefdsafasd</p>
-            </div>
-            <div class='friend__container'>
-                <button class='friend__button' type='submit'><img class='friend__image'
-                        src='/static/media/profile/model5.png'></button>
-                <p class='friend__name'>namefdsafasd</p>
-            </div>
-        </div>
-
-        </form>
-        <div class="map">
-
-        </div>
-        <div class='nav__search-container'>
-            <form class='nav__search-form' action="/ajax/" method="POST">
+    <!-- <div class='long_wrapper'> -->
+    <div class='friend'>
+        {% for user in users %}
+        <div class='friend__li'>
+            <form class='friend__form' action='{% url "favorite" %}' method='POST'>
                 {% csrf_token %}
-                <input class="nav__search-input" type='search' name='search' placeholder="&#xf002 検索">
+                <input class='friend__input' name='user_button' value='{{ user.username }}'>
+                <button class='friend__button' type='submit'>
+                    <img class='friend__image' src='/media/{{ user.profile_image }}'
+                        onerror="this.src='/static/media/default2.jpg'"></button>
+                <p class='friend__name'>{{ user.username }} </p>
+            </form>
+
+        </div>
+        {% endfor %}
+    </div>
+    <h2 class='content__title'>FoodMap</h2>
+    <div class="map">
+
+    </div>
+
+    <div class='result'>
+        <h2 class='result__title'>おすすめ</h2>
+        <div class='result__list'>
+
         </div>
     </div>
+    <div class='nav__search-container'>
+        <form class='nav__search-form' action="/ajax/" method="POST">
+            {% csrf_token %}
+            <input class="nav__search-input" type='search' name='search' placeholder="&#xf002 検索">
+    </div>
+    <!-- </div> -->
 </div>
 
 <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtcFEP6NzAHWBHySPAkD_E3Ua4mFx2fOY
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBoEPpuwEmB_rxxltnl-WA6lRuFf9xYxBQ
     &callback=initMap&libraries=places&v=weekly" async></script>
 
 <!-- ラベル付きマーカーを表示するライブラリ -->
@@ -180,12 +170,6 @@
             ).done(function (data) {
                 saveResult(data);
                 show();
-                // for (key in data) {
-                //     var place_id = key;
-                //     var comment = data[key];
-                //     showPlace(place_id, 1);
-                //     console.log(place_id);
-                // }
             }).fail(function (data) {
                 alert('fail')
             }).always(function (data) {

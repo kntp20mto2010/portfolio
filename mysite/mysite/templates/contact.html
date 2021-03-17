@@ -7,54 +7,57 @@
 {% block content %}
 
 <div class='contact'>
-    <div class='short_wrapper'>
-        <div class='contact__title'>
-            <h2>お問い合わせフォーム (入力画面)</h2> <span class='contact__caution'>※ 内容に誤りがある場合はエラーが発生します</span>
-        </div>
-
-        <form class='contact__form' action='{% url "contact_us" %}' method="POST">
-            {% csrf_token %}
-            <table class='contact__container'>
-                <tr>
-                    <th>お名前<span class='contact__required'>必須</span></th>
-                    <td>
-                        <input type='text' name='name' placeholder='お名前を入力してください'>
-                    </td>
-                </tr>
-                <tr>
-                    <th>タイトル<span class='contact__required'>必須</span></th>
-                    <td class='contact__select'>
-                        <select name='kind'>
-                            <option value='お問い合わせ'>お問い合わせ</option>
-                            <option value='ログインに関して'>ログインに関して</option>
-                            <option value='お店のレビューに関して'>お店のレビューに関して</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        メールアドレス<span class='contact__required'>必須</span>
-                    </th>
-                    <td>
-                        <input type='text' name='email' placeholder='メールアドレスを入力してください'>
-                        <input type='text' name='re-email' placeholder="確認のため再度入力してください">
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        お問い合わせ内容<span class='contact__required'>必須</span>
-                    </th>
-                    <td>
-                        <textarea type='text' name='contents'></textarea>
-                    </td>
-                </tr>
-            </table>
-            <div class='contact__error is-hide'></div>
-            <div class='contact__submit'>
-                <button type='submit'>送 信</button>
-            </div>
-        </form>
+    <div class='contact__title'>
+        <h2>お問い合わせフォーム (入力画面)</h2> <span class='contact__caution'>※ 内容に誤りがある場合はエラーが発生します</span>
     </div>
+
+    <form class='contact__form' action='{% url "contact_us" %}' method="POST">
+        {% csrf_token %}
+        <div class='contact__table'>
+            <div class='contact__tr'>
+                <div class='contact__th'>
+                    お名前<span class='contact__required'>必須</span>
+                </div>
+                <div class='contact__td'>
+                    <input type='text' name='name' placeholder='お名前を入力してください'>
+                </div>
+            </div>
+            <div class='contact__tr'>
+                <div class='contact__th'>
+                    タイトル<span class='contact__required'>必須</span>
+                </div>
+                <div class='contact__td'>
+                    <select name='kind'>
+                        <option value='お問い合わせ'>お問い合わせ</option>
+                        <option value='ログインに関して'>ログインに関して</option>
+                        <option value='お店のレビューに関して'>お店のレビューに関して</option>
+                    </select>
+                </div>
+            </div>
+            <div class='contact__tr'>
+                <div class='contact__th'>
+                    メールアドレス<span class='contact__required'>必須</span>
+                </div>
+                <div class='contact__td'>
+                    <input type='text' name='email' placeholder='メールアドレスを入力してください'>
+                    <input type='text' name='re-email' placeholder="確認のため再度入力してください">
+                </div>
+            </div>
+            <div class='contact__tr'>
+                <div class='contact__th'>
+                    お問い合わせ内容<span class='contact__required'>必須</span>
+                </div>
+                <div class='contact__td'>
+                    <textarea type='text' name='contents'></textarea>
+
+                </div>
+            </div>
+        </div>
+        <div class='contact__error is-hide'></div>
+        <div class='contact__submit'>
+            <button type='submit'>送 信</button>
+        </div>
+    </form>
 </div>
 <script>
     $('.contact__form').submit(function (event) {

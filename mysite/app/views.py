@@ -23,28 +23,8 @@ import json
 # Create your views here.
 def main(request):
     user = request.user
-    datas = ShopData.objects.filter(user_id=user.id)
-    datas = [data.place_id for data in datas]
-    if datas:
-        pass
-    else:
-        datas = [ShopData(place_id="111", user_id="222")]
-    return render(request, "main.html", {})
-
-
-def signup(request):
-    if request.method == "POST":
-        form = SignUpForm(request.POST)
-        # 入力チェック
-        if form.is_valid():
-            form.save()
-            return redirect("main")
-    else:
-        form = SignUpForm()
-
-    context = {"form": form}
-    return render(request, "signup.html", context)
-
+    users=User.objects.all()[:5]
+    return render(request, "main.html", {'users':users})
 
 class SignUp(CreateView):
     form_class = SignUpForm
@@ -53,7 +33,7 @@ class SignUp(CreateView):
 
     def form_valid(self, form):
         user = form.save()
-        login(self.request, user)
+        login(self.request, user, backend='django.contrib.auth.backends.ModelBackend')
         self.object = user
         return HttpResponseRedirect(self.get_success_url())
 
@@ -171,17 +151,23 @@ def getRecommendPersons(user1_id):
         result = collections.Counter(place_id_list)
     return dict(result.most_common()[:10])
 
+def get_users():
+    users = User.objects.all()[:5]
+    json_obj = serializers.serialize('json', users)
+    return json_obj
+
 def get_favorites(request):
-    user = request.user
     dict_ = {}
     print('favorite')
     if request.method == "POST":
         print(request.POST)
-        user_id = request.POST['user_button']
-        json_obj = get_shops(user_id=user_id)
+        username = request.POST['user_button']
+        user=get_object_or_404(User,username=username)
+        json_obj = get_shops(user_id=user.id)
         return HttpResponse(json_obj,content_type='text/json-comment-filterd')
     else:
         return HttpResponse(status=401)
+
 
 # 店舗の情報
 # 店ID､ユーザーID､コメント
@@ -192,13 +178,6 @@ def get_shops(place_id=None, user_id=None):
         datas = ShopData.objects.filter(user_id=user_id)
 
     json_obj = serializers.serialize('json', datas)
-
-    # dict_={}
-    # for data in datas:
-    #     dict_.setdefault(data.place_id,{})
-    #     dict_[data.place_id].setdefault(data.user, data.comment)
-
-    # json_obj=json.dumps(dict_)
     return json_obj
 
 

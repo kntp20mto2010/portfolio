@@ -7,7 +7,7 @@
 var map;
 var current_latLng;
 var markers = {};
-
+var count = 0;
 // Initialize and add the map
 function initMap() {
     waitForElement()
@@ -31,8 +31,8 @@ function initMap() {
     input.index = 1;
     const searchBox = new google.maps.places.SearchBox(input);
     map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
     // nearSearch()
+
 }
 function search() {
     var input = document.getElementsByClassName("nav__search-input")[0]
@@ -70,6 +70,8 @@ function search() {
             alert("エラー発生");
         }
     })
+
+
 }
 
 function nearSearch(place) {
@@ -144,43 +146,43 @@ function nearSearch(place) {
         )
     }
 }
-function pin(position) {
-    var mapLatLng = new google.maps.LatLng(position.coords, latitude, position.coords.longitude)
-    // マップオプションを変数に格納
-    var mapOptions = {
-        zoom: 15,          // 拡大倍率
-        center: mapLatLng,  // 緯度・経度
-        mapTypeControl: false,
-    };
-    // マップオブジェクト作成
-    var map = new google.maps.Map(
-        document.getElementsByClassName("map")[0], // マップを表示する要素
-        mapOptions         // マップオプション
-    );
-    //　マップにマーカーを表示する
-    var marker = new google.maps.Marker({
-        map: map,             // 対象の地図オブジェクト
-        position: mapLatLng   // 緯度・経度
-    });
-}
-// 取得失敗した場合
-function fail(error) {
-    // エラーメッセージを表示
-    switch (error.code) {
-        case 1: // PERMISSION_DENIED
-            alert("位置情報の利用が許可されていません");
-            break;
-        case 2: // POSITION_UNAVAILABLE
-            alert("現在位置が取得できませんでした");
-            break;
-        case 3: // TIMEOUT
-            alert("タイムアウトになりました");
-            break;
-        default:
-            alert("その他のエラー(エラーコード:" + error.code + ")");
-            break;
-    }
-}
+// function pin(position) {
+//     var mapLatLng = new google.maps.LatLng(position.coords, latitude, position.coords.longitude)
+//     // マップオプションを変数に格納
+//     var mapOptions = {
+//         zoom: 15,          // 拡大倍率
+//         center: mapLatLng,  // 緯度・経度
+//         mapTypeControl: false,
+//     };
+//     // マップオブジェクト作成
+//     var map = new google.maps.Map(
+//         document.getElementsByClassName("map")[0], // マップを表示する要素
+//         mapOptions         // マップオプション
+//     );
+//     //　マップにマーカーを表示する
+//     var marker = new google.maps.Marker({
+//         map: map,             // 対象の地図オブジェクト
+//         position: mapLatLng   // 緯度・経度
+//     });
+// }
+// // 取得失敗した場合
+// function fail(error) {
+//     // エラーメッセージを表示
+//     switch (error.code) {
+//         case 1: // PERMISSION_DENIED
+//             alert("位置情報の利用が許可されていません");
+//             break;
+//         case 2: // POSITION_UNAVAILABLE
+//             alert("現在位置が取得できませんでした");
+//             break;
+//         case 3: // TIMEOUT
+//             alert("タイムアウトになりました");
+//             break;
+//         default:
+//             alert("その他のエラー(エラーコード:" + error.code + ")");
+//             break;
+//     }
+// }
 
 var placesList;
 /*
@@ -219,20 +221,11 @@ function displayResults(results, status, pagination) {
 
             //placesList配列をループして、
             //結果表示のHTMLタグを組み立てる
-            var resultHTML = "<ul>";
-            var altImage = ""
-            for (var i = 0; i < placesList.length; i++) {
-                place = placesList[i];
-                //ratingがないのものは「---」に表示変更
-                var rating = place.rating;
-                if (rating == undefined) rating = "---";
+            for (place in placesList) {
                 var marker = setMarkerWithLabel(place)
             }
 
-            resultHTML += "</ul>";
-
-            //結果表示
-            document.getElementsByClassName("results")[0].innerHTML = resultHTML;
+            createResultHtml(placeList)
         }
 
     } else {
@@ -354,37 +347,13 @@ function deleteMakers() {
     }
 }
 
-// マーカーへの吹き出しの追加
-function setInfoW(place, latlng, address) {
-    infoWindow = new google.maps.InfoWindow({
-        content: "<a href='http://www.google.com/search?q=" + place + "' target='_blank'>" + place + "</a><br><br>" + latlng + "<br><br>" + address + "<br><br><a href='http://www.google.com/search?q=" + place + "&tbm=isch' target='_blank'>画像検索 by google</a>"
-    });
-}
-
 var dialog;
 function showDialog() {
     dialog = document.getElementsByClassName("dialog")[0];
     dialog.show();
 }
 
-function showShops(place_id_list) {
-    for (place_id in place_id_list) {
-        showPlace(place_id)
-    }
-}
 
-function showPlace(place_id, person_num) {
-    console.log(place_id)
-    waitForElement()
-    var service = new google.maps.places.PlacesService(map);
-    service.getDetails({
-        placeId: place_id
-    }, function (result, status) {
-        console.log("店名:" + result.name + ",人数:" + person_num)
-        marker = setMarkerWithLabel2(result, person_num)
-
-    })
-}
 
 function waitForElement() {
     if (typeof google === "undefined") {
@@ -397,28 +366,35 @@ function waitForElement() {
 }
 
 function setMarkerListener(marker, place) {
-    console.log('asdasd')
     // 開いたら画像一覧とコメントする欄があるダイアログを表示し送信したらDBへ送られる
     google.maps.event.addListener(marker, "click", function (e) {
-        console.log('BBBB')
-        var img_element = document.getElementsByClassName("dialog__image")[0];
-        if (place.photos && place.photos.length > 0) {
-            img_element.src = place.photos[0].getUrl({ "maxWidth": 720, "maxHeight": 720 });
-        }
-        img_element.alt = '画像がありません';
-        console.log('test' + place.place_id)
-        $(function () {
-            // $("*[name=good_button]").val(place.place_id)
-            $('.dialog').fadeIn(200).css('display', 'flex');
-            $(".dialog__title").text(place.name);
-            console.log(place.place_id);
-            $(".dialog__input").attr("value", place.place_id);
-        });
-
-        // iw.open(map, this);
+        openDialog(place);
     });
 }
 
+function setResultListener(button, place) {
+    console.log("ボタンイベントを設定します:" + place.name);
+    let next = button.nextElementSibling;
+    console.log('next', next);
+    button.addEventListener('click', function () {
+        console.log('aaaa');
+        openDialog(place);
+    });
+}
+
+function openDialog(place) {
+    var img_element = document.getElementsByClassName("dialog__image")[0];
+    if (place.photos && place.photos.length > 0) {
+        img_element.src = place.photos[0].getUrl({ "maxWidth": 720, "maxHeight": 720 });
+    }
+    img_element.alt = '画像がありません';
+    $(function () {
+        // $("*[name=good_button]").val(place.place_id)
+        $('.dialog').fadeIn(200).css('display', 'flex');
+        $(".dialog__title").text(place.name);
+        $(".dialog__input").attr("value", place.place_id);
+    });
+}
 /**
  * 関数
  * @param {data} data - 検索結果(json)
@@ -445,12 +421,80 @@ function saveResult(data) {
 
 
 function show() {
+    deleteMakers();
+    showPlaces();
+}
+function showPlaces() {
     for (var key in result) {
         var place_id = key;
         var datas = dict[key]
         var person_num = datas.length;
+        if (!place_id) {
+            continue;
+        }
         showPlace(place_id, person_num);
     }
+}
+
+function showPlace(place_id, person_num) {
+    console.log(place_id)
+    waitForElement()
+    var service = new google.maps.places.PlacesService(map);
+    service.getDetails({
+        placeId: place_id,
+        fields: ['geometry', 'name', 'photos']
+    }, function (result, status) {
+        console.log("結果:" + result.photos);
+        console.log("店名:" + result.name + ",人数:" + person_num)
+        marker = setMarkerWithLabel2(result, person_num)
+        createResultHtml(result);
+        let buttons = document.getElementsByClassName("result__button");
+        let button = buttons.item(buttons.length - 1);
+        console.log("ボタン数:" + buttons.length);
+        setResultListener(button, result);
+    });
+}
+
+function createResultHtml(place) {
+    var src = '';
+    if (place.photos && place.photos.length > 0) {
+        src = place.photos[0].getUrl({ "maxWidth": 720, "maxHeight": 720 });
+    }
+    let resultHTML = '';
+    if (count / 3 == 0) {
+        let resultHTML = "<div class='result__row'></div>";
+        document.getElementsByClassName("result__list")[0].insertAdjacentHTML('beforeend', resultHTML);
+    }
+
+    resultHTML += "<div class='result__elem'>";
+    if (count < 3) {
+        resultHTML += "<img class='result__ranking' src='/static/media/ranking" + (count + 1) + ".png'>";
+    }
+    resultHTML += "<button class='result__button'>";
+    resultHTML += "<img class='result__image' src = '" + src + " '>";
+    resultHTML += "</button>";
+    resultHTML += "<div class='result__name'>" + place.name + "</div>";
+    resultHTML += "</div>";
+    let list = document.getElementsByClassName("result__row");
+    let last = list.item(list.length - 1);
+    last.insertAdjacentHTML('beforeend', resultHTML);
+
+    count += 1;
+}
+
+function showUsers() {
+    var datas = result[place_id]
+    let resultHTML = '';
+    for (data in datas) {
+        resultHTML += "<div class='friend__li'>";
+        resultHTML += "<input class='friend__input' name='user_button' value='" + data.username + "'>";
+        resultHTML += "<button class='friend__button' type='submit'><img class='friend__image' src = '/static/media/profile/model1.png' ></button >";
+        resultHTML += "<p class='friend__name'>" + data.username + "</p>";
+        resultHTML += "</div>";
+    }
+    var elem = document.getElementsByClassName("friend__form")[0];
+    elem.appendChild(elem);
+    // return resultHTML;
 }
 
 // ダイアログを開いたらユーザーとコメントの一覧を表示する
@@ -460,11 +504,13 @@ function open(place_id) {
     for (data in datas) {
         resultHTML += "<div class='dialog__friend'>";
         resultHTML += "<div class='dialog__friend-profile'>";
-        resultHTML += "<button class='dialog__friend-button' type='submit'>";
+        resultHTML += "<button class='dialog__friend-button'>";
         resultHTML += "<img class='dialog__friend-image' src='/static/media/profile/model1.png'></button>"
         resultHTML += "<div class='dialog__friend-name'>" + data.username + "</div>"
         resultHTML += "<div class='dialog__friend-comment'>" + data.comment + "</div>"
     }
+
+    return resultHTML;
 }
 // fucntion sortMarker(){
 //     latMap[latMap.length] = { 'lat': lat, 'marker': marker };
