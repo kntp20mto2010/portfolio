@@ -2,83 +2,80 @@
 {% load static %}
 {% load sass_tags %}
 {% block style %}
-<link rel='stylesheet' href="{% sass_src 'main/css/site.scss' %}">
+<link rel='stylesheet' href="{% sass_src 'main/css/styles.scss' %}">
 {% endblock %}
 
-<body>
 
-    {% block content %}
-    <div class='profile'>
-        <h2>プロフィールの編集</h2>
-        <div class='profile__wrapper'>
-            <div class='profile__container'>
-                <div class='profile__form-image'>
-                    <form action="{% url 'upload' %}" method="POST" enctype='multipart/form-data'>
-                        {% csrf_token %}
-                        <input class='profile__hidden' type='file' name='file' value=''>
+{% block content %}
+<div class='profile'>
+    <h2>プロフィールの編集</h2>
+    <div class='profile__wrapper'>
+        <div class='profile__container'>
+            <div class='profile__form-image'>
+                <form action="{% url 'upload' %}" method="POST" enctype='multipart/form-data'>
+                    {% csrf_token %}
+                    <input class='profile__hidden' type='file' name='file' value=''>
 
-                        <button class='profile__image-button' type='submit'><img class='profile__image'
-                                src='/media/{{ form.profile_image}}'
-                                onerror="this.src='/static/media/default2.jpg'"></button>
-                    </form>
-                </div>
+                    <button class='profile__image-button' type='submit'><img class='profile__image'
+                            src='/media/{{ form.profile_image}}'
+                            onerror="this.src='/static/media/default2.jpg'"></button>
+                </form>
+            </div>
 
-                <div class='profile__container-container'>
-                    <form action="" method="POST">
-                        {% csrf_token %}
-                        {% for field in form %}
-                        <div class='profile__form-group'>
-                            {{ field.label_tag }}
-                            {{ field }}
-                            {{ field.errors }}
-                        </div>
-                        {% endfor %}
+            <div class='profile__container-container'>
+                <form class='profile__form' action="" method="POST">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    <div class='profile__form-group'>
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {{ field.errors }}
+                    </div>
+                    {% endfor %}
 
-                        {% for error in form.non_field_errors %}
-                        <div class='alert' role='alert'>
-                            <p> {{ error }}</p>
-                        </div>
-                        {% endfor %}
-                        <div class='profile__submit-button'>
-                            <button type='submit'>変 更</button>
-                        </div>
-                    </form>
-                </div>
+                    {% for error in form.non_field_errors %}
+                    <div class='alert' role='alert'>
+                        <p> {{ error }}</p>
+                    </div>
+                    {% endfor %}
+                    <div class='profile__submit-button'>
+                        <button type='submit'>変 更</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-    </div>
-    <script>
-        $('.profile__hidden').closest('form').submit(function (event) {
-            event.preventDefault();
-            var form = $(this);
-            var params = new FormData($(this)[0]);
-            $.ajax({
-                type: "POST",
-                url: form.prop('action'),
-                contentType: false,
-                processData: false,
-                data: params,
-                dataType: "json",
+</div>
+<script>
+    $('.profile__hidden').closest('form').submit(function (event) {
+        event.preventDefault();
+        var form = $(this);
+        var params = new FormData($(this)[0]);
+        $.ajax({
+            type: "POST",
+            url: form.prop('action'),
+            contentType: false,
+            processData: false,
+            data: params,
+            dataType: "json",
 
-            }).done(function (data) {
-                console.log(data.image);
-                $(".profile__image").attr("src", "/media/" + data["image"]);
-            });
+        }).done(function (data) {
+            console.log(data.image);
+            $(".profile__image").attr("src", "/media/" + data["image"]);
         });
+    });
 
-        $(function () {
-            $('.profile__hidden').change(function () {
-                $(this).closest('form').submit();
-            });
+    $(function () {
+        $('.profile__hidden').change(function () {
+            $(this).closest('form').submit();
         });
+    });
 
-        $(function () {
-            $('.profile__image-button').click(function () {
-                $('.profile__hidden').click();
-                return false;
-            });
+    $(function () {
+        $('.profile__image-button').click(function () {
+            $('.profile__hidden').click();
+            return false;
         });
-    </script>
-    {% endblock %}
-</body>
+    });
+</script>
+{% endblock %}

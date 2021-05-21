@@ -1,0 +1,31 @@
+@mixin background {
+    display: none;
+    height: 100vh;
+    position: absolute;
+    &__column1 {
+        height: 100%;
+        width: 300px;
+        background-image: url("/static/media/background/food1.jpg");
+        background-size: cover;
+    }
+    &__column2 {
+        width: 300px;
+        background-image: url("/static/media/background/food2.jpg");
+        background-size: cover;
+    }
+    &__column3 {
+        width: 300px;
+        background-image: url("/static/media/background/food3.jpg");
+        background-size: cover;
+    }
+    &__column4 {
+        width: 300px;
+        background-image: url("/static/media/background/food4.jpg");
+        background-size: cover;
+    }
+    &__column5 {
+        width: 300px;
+        background-image: url("/static/media/background/food5.jpg");
+        background-size: cover;
+    }
+}

@@ -1,0 +1,23 @@
+@mixin labels() {
+    display: inline-block;
+    color: rgb(0, 0, 0);
+    font-family: "Lucida Grande", "Arial", sans-serif;
+    font-size: 10px;
+    --font-weight: bold;
+    text-align: center;
+
+    padding: 0px 2px;
+    border: 2px solid black;
+    border-radius: 5px;
+    white-space: nowrap;
+}
+.labels {
+    &--pink {
+        @include labels();
+        background-color: rgb(236, 182, 209);
+    }
+    &--yellow {
+        @include labels();
+        background-color: rgb(236, 230, 182);
+    }
+}

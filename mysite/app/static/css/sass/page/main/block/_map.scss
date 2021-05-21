@@ -1,0 +1,16 @@
+.map {
+    position: relative;
+    min-height: 500px;
+    height: 50vmax;
+    margin: 0 auto 0 auto;
+
+    @include mq(sm) {
+    }
+    @include mq() {
+        margin: 0 auto;
+        border: 3px solid $color-main;
+        // border-radius: 30px;
+    }
+    @include mq(lg) {
+    }
+}

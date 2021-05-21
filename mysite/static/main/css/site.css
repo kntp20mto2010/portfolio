@@ -11,7 +11,7 @@ html { height: 100%; }
 
 body { min-height: 100%; position: relative; margin: 0; background-color: white; background-image: url("/static/media/rice_paper6.png"); background-size: cover; }
 
-h1 { font-size: clamp(16px, 4vh, 80px); font-style: oblique; margin: auto; display: flex; align-items: center; justify-content: center; padding: 10px; }
+h1 { font-size: clamp(16px, 4vh, 80px); font-style: oblique; margin: auto; display: flex; align-items: center; justify-content: center; padding: clamp(2px, 1vh, 10px); }
 
 .background { display: none; height: 100vh; position: absolute; }
 
@@ -29,11 +29,11 @@ h1 { font-size: clamp(16px, 4vh, 80px); font-style: oblique; margin: auto; displ
 
 @media screen and (min-width: 768px) { .long_wrapper { padding-right: 10px; /* 3 */ padding-left: 10px; /* 3 */ } }
 
-.wrapper { min-height: 100%; }
+.wrapper { display: flex; flex-direction: column; min-height: 100vh; }
 
 .short_wrapper { margin-right: auto; /* 1 */ margin-left: auto; /* 1 */ max-width: 720px; /* 2 */ padding-right: 10px; /* 3 */ padding-left: 10px; /* 3 */ position: relative; }
 
-.nav { background-image: url("/static/media/rice_paper6.png"); border-bottom: 2px solid #f37f27; padding-top: 10px; }
+.nav { background-image: url("/static/media/rice_paper6.png"); border-bottom: 2px solid #f37f27; }
 
 @media screen and (min-width: 768px) { .nav { padding-bottom: 10px; } }
 
@@ -43,23 +43,23 @@ h1 { font-size: clamp(16px, 4vh, 80px); font-style: oblique; margin: auto; displ
 
 .nav__setting-button { border: 1px solid #968b76; border-radius: 5px; color: gray; height: clamp(30px, 4vh, 100px); width: clamp(30px, 4vh, 100px); margin-right: 10px; }
 
-.nav__setting-button i { font-size: clamp(16px, 3vh, 48px); }
+.nav__setting-button i { font-size: clamp(16px, 2.5vh, 48px); }
 
 .nav__setting-button:hover { cursor: pointer; }
 
 .nav__setting-container { position: absolute; top: 5px; right: 0; }
 
-.nav__setting-window { display: none; position: absolute; width: 200px; top: 40px; right: 25px; border-radius: 5px; background-color: white; box-shadow: 0 5px 10px 0 gray; z-index: 100; }
+.nav__setting-window { display: none; position: absolute; width: clamp(200px, 20vmax, 400px); top: 40px; right: 25px; border-radius: 5px; background-color: white; box-shadow: 0 5px 10px 0 gray; z-index: 100; }
 
-.nav__setting-window ul { list-style-type: none; padding: 15px; }
+.nav__setting-window ul { list-style-type: none; padding: clamp(5px, 1vmax, 15px); }
 
-.nav__setting-window li { font-size: 14px; text-decoration: none; }
+.nav__setting-window li { text-decoration: none; }
 
 .nav__setting-window li:last-child { border-top: 1px solid gray; text-align: center; }
 
-.nav__setting-window i { font-size: 20px; padding-right: 5px; }
+.nav__setting-window i { font-size: clamp(20px, 2vh, 40px); padding-right: 5px; }
 
-.nav__setting-window a { display: flex; align-items: center; justify-content: center; position: relative; height: 34px; color: black; font-size: 12px; text-decoration: none; padding: 7px 7px 7px 7px; z-index: 10; }
+.nav__setting-window a { display: flex; align-items: center; justify-content: center; position: relative; height: clamp(34px, 4vmax, 68px); color: black; font-size: clamp(14px, 1.5vh, 28px); text-decoration: none; padding: 7px 7px 7px 7px; z-index: 10; }
 
 .nav__setting-window a:hover { color: #ee793a; }
 
@@ -137,15 +137,13 @@ h1 { font-size: clamp(16px, 4vh, 80px); font-style: oblique; margin: auto; displ
 
 .friend__name { font-size: 12px; font-family: Arial, Helvetica, sans-serif; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
-.content { height: 100%; padding-bottom: 80px; }
+.content { flex: 1; height: 100vh; padding-bottom: clamp(60px, 5vh, 140px); }
 
 .content__title { color: #ab6446; font-size: 30px; font-size: clamp(20px, 3vh, 60px); padding: 10px 0; }
 
 .map { position: relative; min-height: 500px; height: 50vmax; margin: 0 auto 0 auto; }
 
 @media screen and (min-width: 768px) { .map { margin: 0 auto; border: 3px solid #ee793a; } }
-
-.content2 { display: inline-block; height: 600px; margin: 10px; background-color: #ebebeb; }
 
 .result { margin: 10px; }
 
@@ -167,7 +165,7 @@ h1 { font-size: clamp(16px, 4vh, 80px); font-style: oblique; margin: auto; displ
 
 .result__image { height: 100%; width: 100%; border-radius: 5px; pointer-events: none; }
 
-.result__name { position: absolute; bottom: 0px; height: clamp(40px, 5vh, 80px); width: 100%; color: white; font-size: clamp(14px, 2vh, 28px); background-color: #808080bd; padding: 5px 10px; }
+.result__name { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; position: absolute; bottom: 0px; height: clamp(40px, 3vh, 64px); width: 100%; color: white; font-size: clamp(14px, 1.3vh, 32px); line-height: clamp(14px, 1.4vh, 32px); background-color: #808080bd; overflow: hidden; padding: 5px 10px; }
 
 .labels--pink { display: inline-block; color: black; font-family: "Lucida Grande", "Arial", sans-serif; font-size: 10px; --font-weight: bold; text-align: center; padding: 0px 2px; border: 2px solid black; border-radius: 5px; white-space: nowrap; background-color: #ecb6d1; }
 
@@ -223,7 +221,7 @@ h1 { font-size: clamp(16px, 4vh, 80px); font-style: oblique; margin: auto; displ
 
 .dialog__friend-name { font-size: 12px; font-weight: bold; }
 
-.profile { min-width: 400px; width: 60vw; text-align: center; margin: auto; font-size: 18px; }
+.profile { min-width: 350px; width: 60vw; text-align: center; margin: 10% auto 10% auto; font-size: 18px; }
 
 .profile h2 { font-size: 20px; padding: 10px; margin-top: 10px; }
 
@@ -231,11 +229,15 @@ h1 { font-size: clamp(16px, 4vh, 80px); font-style: oblique; margin: auto; displ
 
 .profile__wrapper { margin-top: 10px; margin-bottom: 110px; }
 
-.profile__container { display: flex; flex-direction: column; position: relative; height: 75vw; min-height: 460px; max-height: 800px; width: 100%; max-width: 700px; background-color: white; padding: 20px; border-radius: 20px; box-shadow: 0 1px 10px 0; }
+.profile__container { display: flex; flex-direction: column; position: relative; height: 75vw; min-height: 460px; max-height: 800px; width: 100%; max-width: 700px; background-color: white; padding: 20px; margin: auto; border-radius: 20px; box-shadow: 0 1px 10px 0; }
+
+.profile__container-container { flex-grow: 1; }
+
+.profile__form { display: flex; flex-direction: column; height: 100%; }
 
 .profile__hidden { display: none; }
 
-.profile__image-button { height: 150px; width: 150px; border: 2px solid #ee793a; border-radius: 50%; padding: 0; }
+.profile__image-button { height: clamp(150px, 15vh, 300px); width: clamp(150px, 15vh, 300px); border: 2px solid #ee793a; border-radius: 50%; padding: 0; }
 
 .profile__image-button:hover { cursor: pointer; }
 
@@ -247,9 +249,9 @@ h1 { font-size: clamp(16px, 4vh, 80px); font-style: oblique; margin: auto; displ
 
 .profile__columns { padding: 20px; }
 
-.profile__submit-button { min-width: 250px; width: 40vw; max-width: 450px; margin: 20px auto 10px auto; }
+.profile__submit-button { min-width: 250px; width: 40vw; max-width: 450px; margin: auto auto 0 auto; }
 
-.profile__submit-button button { height: 5vh; max-height: 60px; width: 100%; margin: auto; font-size: clamp(16px, 3vw, 30px); background-color: #2660a1; border-radius: 10px; color: white; font-weight: bold; }
+.profile__submit-button button { height: clamp(16px, 4vh, 60px); max-height: 60px; width: 100%; margin: auto; font-size: clamp(16px, 3vh, 30px); background-color: #2660a1; border-radius: 10px; color: white; font-weight: bold; }
 
 .profile__submit-button button:hover { cursor: pointer; opacity: 0.8; }
 
@@ -267,7 +269,7 @@ h1 { font-size: clamp(16px, 4vh, 80px); font-style: oblique; margin: auto; displ
 
 .success p { font-size: 30px; }
 
-.contact { padding: 0 10px 70px 10px; }
+.contact { padding: 0 10px 70px 10px; margin: 10% 0 10% 0; }
 
 .contact__title { display: flex; align-items: center; justify-content: center; flex-direction: column; position: relative; padding: 10px 0 10px 0; }
 
@@ -295,7 +297,7 @@ h1 { font-size: clamp(16px, 4vh, 80px); font-style: oblique; margin: auto; displ
 
 .contact__th { display: flex; align-items: center; justify-content: space-between; font-size: clamp(12px, 1vh, 40px); text-align: left; padding: 0 10px 0 10px; background-color: #ffe4aa; background-clip: padding-box; }
 
-@media screen and (min-width: 520px) { .contact__th { width: clamp(150px, 15vh, 400px); } }
+@media screen and (min-width: 520px) { .contact__th { width: clamp(150px, 12vh, 400px); } }
 
 .contact__td { display: flex; flex: 1; flex-direction: column; text-align: center; background-color: white; }
 
@@ -307,13 +309,13 @@ h1 { font-size: clamp(16px, 4vh, 80px); font-style: oblique; margin: auto; displ
 
 .contact textarea { resize: vertical; min-height: 200px; margin: 10px; }
 
-.contact__submit { width: 300px; margin: 60px auto 5px auto; }
+.contact__submit { min-width: 220px; max-width: 300px; margin: 60px auto 5px auto; }
 
 .contact__submit button { height: clamp(40px, 3vh, 80px); width: 100%; margin: auto; font-size: clamp(15px, 1.5vh, 30px); background-color: #2660a1; border-radius: 10px; color: white; font-weight: bold; }
 
 .contact__submit button:hover { cursor: pointer; opacity: 0.8; }
 
-.footer { height: clamp(70px, 5vh, 140px); width: 100%; position: absolute; bottom: 0; background-color: #454039; }
+.footer { height: clamp(60px, 5vh, 140px); width: 100%; position: absolute; bottom: 0; background-color: #454039; }
 
 .footer__container { display: flex; align-items: center; justify-content: space-between; height: 100%; position: relative; color: white; }
 
@@ -321,9 +323,11 @@ h1 { font-size: clamp(16px, 4vh, 80px); font-style: oblique; margin: auto; displ
 
 .footer__container > a:hover { color: blue; }
 
-.footer__about { display: flex; align-items: flex-start; justify-content: center; flex-direction: column; height: 100%; margin-left: 5px; }
+.footer__about { display: flex; align-items: flex-start; justify-content: center; flex-direction: column; height: 100%; width: 25%; margin-left: 5px; }
 
 .footer__about p { font-size: 0px; padding: 5px; }
+
+@media screen and (min-width: 520px) { .footer__about p { font-size: clamp(12px, 1vh, 32px); } }
 
 @media screen and (min-width: 768px) { .footer__about p:first-child { font-size: clamp(16px, 2vh, 32px); } }
 
@@ -355,7 +359,7 @@ h1 { font-size: clamp(16px, 4vh, 80px); font-style: oblique; margin: auto; displ
 
 .footer__contact span { display: none; }
 
-@media screen and (min-width: 520px) { .footer__contact span { display: inline-block; font-size: clamp(12px, 3vw, 32px); } }
+@media screen and (min-width: 520px) { .footer__contact span { display: inline-block; font-size: clamp(12px, 1.5vh, 20px); } }
 
 @media screen and (min-width: 768px) { .footer__contact span { font-size: clamp(16px, 2vh, 32px); } }
 

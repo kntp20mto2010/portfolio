@@ -1,0 +1,141 @@
+.contact {
+    // footer用
+    padding: 0 10px 70px 10px;
+    margin: 10% 0 10% 0;
+    &__title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        @include mq() {
+            align-items: flex-start;
+        }
+        position: relative;
+        padding: 10px 0 10px 0;
+
+        & h2 {
+            font-size: clamp(20px, 2vh, 40px);
+            padding: 10px 0 10px 0;
+        }
+    }
+
+    &__caution {
+        font-size: clamp(12px, 1vh, 40px);
+        @include mq() {
+            position: absolute;
+            bottom: 2px;
+            right: 0px;
+        }
+    }
+
+    &__error {
+        color: red;
+        font-size: 14px;
+        text-align: center;
+        padding: 5px;
+    }
+
+    &__table {
+        width: 100%;
+    }
+
+    &__tr {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        @include mq(sm) {
+            flex-direction: row;
+        }
+
+        width: 100%;
+
+        @include mq(sm) {
+            border-top: 1px solid gray;
+            border-bottom: 1px solid gray;
+        }
+
+        &:first-child {
+            @include mq(sm) {
+                border-top: 2px solid gray;
+            }
+        }
+        &:last-child {
+            @include mq(sm) {
+                border-bottom: 2px solid gray;
+            }
+        }
+        background-clip: padding-box;
+    }
+    &__th {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        @include mq(sm) {
+            width: clamp(150px, 12vh, 400px);
+        }
+
+        font-size: clamp(12px, 1vh, 40px);
+        text-align: left;
+        padding: 0 10px 0 10px;
+        background-color: rgb(255, 228, 170);
+        background-clip: padding-box;
+    }
+
+    &__td {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+
+        text-align: center;
+
+        background-color: white;
+
+        @include mq() {
+            // width: 400px;
+        }
+    }
+    &__required {
+        color: white;
+        background-color: red;
+        font-size: clamp(10px, 1vh, 40px);
+        padding: 2px;
+    }
+    input {
+        height: clamp(35px, 4vh, 70px);
+
+        font-size: clamp(15px, 1vh, 40px);
+        padding-left: 5px;
+        margin: 10px;
+    }
+    select {
+        height: clamp(35px, 3vh, 70px);
+        font-size: clamp(15px, 1vh, 40px);
+        margin: 10px;
+    }
+    textarea {
+        resize: vertical;
+        min-height: 200px;
+        margin: 10px;
+    }
+    &__submit {
+        min-width: 220px;
+        max-width: 300px;
+        margin: 60px auto 5px auto;
+        & button {
+            height: clamp(40px, 3vh, 80px);
+            width: 100%;
+            margin: auto;
+            font-size: clamp(15px, 1.5vh, 30px);
+            background-color: $color-blue;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            &:hover {
+                cursor: pointer;
+                opacity: 0.8;
+            }
+        }
+    }
+}

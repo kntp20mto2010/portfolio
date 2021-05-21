@@ -1,0 +1,33 @@
+@font-face {
+    font-family: "IPA";
+    src: url("/static/fonts/ipaexm.ttf") format("truetype");
+}
+@font-face {
+    font-family: "brandon";
+    src: url("/static/fonts/BrandonPrinted-Inline.ttf") format("truetype");
+}
+@font-face {
+    font-family: "signika";
+    src: url("/static/fonts/Signika-Light.ttf") format("truetype");
+}
+* {
+    box-sizing: border-box;
+}
+
+$breakpoints: (
+    "sm": "screen and (min-width: 520px)",
+    "md": "screen and (min-width: 768px)",
+    "lg": "screen and (min-width:1000px)",
+) !default;
+
+@mixin mq($breakpoint: md) {
+    @media #{map-get($breakpoints, $breakpoint)} {
+        @content;
+    }
+}
+
+$color-main: #ee793a;
+$color-blue: #2660a1;
+$color-twitter: #1da1f2;
+$color-red: #e30000;
+$color-gray: #4a4a4a;

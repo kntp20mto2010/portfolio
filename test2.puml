@@ -1,0 +1,8 @@
+@startuml
+start
+:footerを作成;
+if (コンテンツ部分を1ページに収めるか) then (YES)
+    :contentはflex 1を適用;
+else (NO)
+    :footerにposition.absolute & 親にmargin-bottom;
+@enduml

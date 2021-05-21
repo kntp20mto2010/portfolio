@@ -1,0 +1,12 @@
+.container {
+    flex: 1;
+    height: 100vh;
+    padding-bottom: clamp(60px, 5vh, 140px);
+
+    &__title {
+        color: #ab6446;
+        font-size: 30px;
+        font-size: clamp(20px, 3vh, 60px);
+        padding: 10px 0;
+    }
+}

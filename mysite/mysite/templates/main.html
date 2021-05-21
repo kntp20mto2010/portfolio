@@ -2,7 +2,7 @@
 {% load static %}
 {% load sass_tags %}
 {% block style %}
-<link rel="stylesheet" href="{% sass_src 'main/css/site.scss' %}" />
+<link rel="stylesheet" href="{% sass_src 'main/css/styles.scss' %}" />
 {% endblock %}
 {% block content %}
 <div class='popup loading is-hide'>
@@ -55,8 +55,7 @@
     {% endfor %}
 </ul>
 
-<div class='content'>
-    <!-- <div class='long_wrapper'> -->
+<div class='container'>
     <div class='friend'>
         {% for user in users %}
         <div class='friend__li'>
@@ -88,7 +87,6 @@
             {% csrf_token %}
             <input class="nav__search-input" type='search' name='search' placeholder="&#xf002 検索">
     </div>
-    <!-- </div> -->
 </div>
 
 <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
@@ -114,8 +112,9 @@
                 url: form.prop('action'),
                 method: form.prop('method'),
                 data: form.serialize(),
-                timeout: 10000,
                 dataType: 'json',
+
+                timeout: 10000,
 
                 //リクエストが完了するまで実行される
                 beforeSend: function () {
@@ -181,6 +180,7 @@
             });
         });
     });
+
 
 </script>
 

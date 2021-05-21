@@ -1,0 +1,35 @@
+@startuml
+start
+:i=1;
+while(i<=10) is (Yes)
+    :println(i);
+    :i+=1;
+endwhile (No)
+stop
+@enduml
+
+@startuml
+start
+:k=0;
+while(k < array.Length) is (Yes)
+    while( i > k ) is (Yes)
+        :i = array.Length;
+        if (array[i-1] > array[i]) then (Yes)
+            :array[i-1]=w;
+            :array[i]=array[i-1];
+            :array[i]=w;
+        endif
+        :i = i-1;
+    endwhile (No)
+        :k = k+1;
+        note right
+        This note is on several
+        //lines// and can
+        contain <b>HTML</b>
+        ====
+        * Calling the method ""foo()"" is prohibited
+        end note
+endwhile (No)
+:配列データを出力;
+stop
+@enduml

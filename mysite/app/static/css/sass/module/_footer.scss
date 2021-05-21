@@ -1,0 +1,164 @@
+.footer {
+    height: clamp(60px, 5vh, 140px);
+    width: 100%;
+
+    &-abs {
+        position: absolute;
+        bottom: 0;
+    }
+
+    background-color: #454039;
+    // background-image: url("/static/media/wood.jpg");
+    // background-size: cover;
+    &__container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 100%;
+        position: relative;
+
+        color: white;
+        > a {
+            color: white;
+            text-decoration: none;
+            &:hover {
+                color: blue;
+            }
+        }
+    }
+
+    &__about {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        flex-direction: column;
+
+        // position: absolute;
+        height: 100%;
+        width: 25%;
+
+        margin-left: 5px;
+        & p {
+            font-size: 0px;
+            padding: 5px;
+            @include mq(sm) {
+                font-size: clamp(12px, 1vh, 32px);
+            }
+        }
+        & p:first-child {
+            @include mq() {
+                font-size: clamp(16px, 2vh, 32px);
+            }
+        }
+        & p:last-child {
+            @include mq() {
+                font-size: clamp(12px, 1vh, 24px);
+            }
+        }
+    }
+    &__share {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        left: 0;
+        right: 0;
+
+        height: 100%;
+        margin: auto;
+
+        @include mq(sm) {
+            padding-bottom: 15px;
+        }
+        & > a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+
+            height: clamp(35px, 4vh, 70px);
+            width: clamp(35px, 4vh, 70px);
+
+            margin: auto 5px;
+
+            @include mq(sm) {
+                height: clamp(35px, 3vh, 70px);
+                width: clamp(35px, 3vh, 70px);
+
+                margin: auto 10px;
+            }
+
+            color: white;
+            border: 1px solid white;
+            border-radius: 50%;
+            & > i {
+                font-size: clamp(20px, 2vh, 40px);
+            }
+        }
+        & img {
+            height: 100%;
+        }
+    }
+    &__contact {
+        height: fit-content;
+        background-color: white;
+        border: 2px solid rgb(255, 255, 255);
+
+        border-radius: 5px;
+        margin-right: 10px;
+        @include mq(sm) {
+            width: fit-content;
+        }
+        > a {
+            display: block;
+            padding: 10px;
+
+            color: white;
+            background-color: $color-blue;
+
+            text-decoration: none;
+            border-radius: 5px;
+
+            &:hover {
+                cursor: pointer;
+                opacity: 0.9;
+            }
+        }
+        & i {
+            font-size: clamp(16px, 2vh, 32px);
+            @include mq(sm) {
+                display: none;
+                padding-right: 4px;
+            }
+        }
+        & span {
+            display: none;
+            @include mq(sm) {
+                display: inline-block;
+                font-size: clamp(12px, 1.5vh, 20px);
+            }
+            @include mq() {
+                font-size: clamp(16px, 2vh, 32px);
+            }
+        }
+    }
+    &__copyright {
+        display: none;
+        @include mq(sm) {
+            display: block;
+        }
+        position: absolute;
+        bottom: 3px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 10px;
+
+        & a {
+            color: white;
+            text-decoration: none;
+            &:hover {
+                color: blue;
+            }
+        }
+    }
+}

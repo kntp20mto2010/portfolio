@@ -1,0 +1,153 @@
+@font-face { font-family: "IPA"; src: url("/static/fonts/ipaexm.ttf") format("truetype"); }
+
+@font-face { font-family: "brandon"; src: url("/static/fonts/BrandonPrinted-Inline.ttf") format("truetype"); }
+
+@font-face { font-family: "signika"; src: url("/static/fonts/Signika-Light.ttf") format("truetype"); }
+
+* { box-sizing: border-box; }
+
+html { height: 100%; }
+
+body { min-height: 100%; position: relative; margin: 0; background-color: white; background-image: url("/static/media/rice_paper6.png"); background-size: cover; }
+
+.wrapper { display: flex; flex-direction: column; min-height: 100vh; }
+
+.long_wrapper { margin-right: auto; /* 1 */ margin-left: auto; /* 1 */ height: 100%; position: relative; }
+
+@media screen and (min-width: 768px) { .long_wrapper { padding-right: 10px; /* 3 */ padding-left: 10px; /* 3 */ } }
+
+/*
+html5doctor.com Reset Stylesheet
+v1.6.1
+Last Updated: 2010-09-17
+Author: Richard Clark - http://richclarkdesign.com
+Twitter: @rich_clark
+*/
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video { margin: 0; padding: 0; border: 0; outline: 0; font-size: 100%; vertical-align: baseline; background: transparent; }
+
+body { line-height: 1; }
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+
+nav ul { list-style: none; }
+
+blockquote, q { quotes: none; }
+
+blockquote:before, blockquote:after, q:before, q:after { content: ""; content: none; }
+
+a { margin: 0; padding: 0; font-size: 100%; vertical-align: baseline; background: transparent; }
+
+/* change colours to suit your needs */
+ins { background-color: #ff9; color: #000; text-decoration: none; }
+
+/* change colours to suit your needs */
+mark { background-color: #ff9; color: #000; font-style: italic; font-weight: bold; }
+
+del { text-decoration: line-through; }
+
+abbr[title], dfn[title] { border-bottom: 1px dotted; cursor: help; }
+
+table { border-collapse: collapse; border-spacing: 0; }
+
+/* change border colour to suit your needs */
+hr { display: block; height: 1px; border: 0; border-top: 1px solid #cccccc; margin: 1em 0; padding: 0; }
+
+input, select { vertical-align: middle; }
+
+.footer { height: clamp(60px, 5vh, 140px); width: 100%; background-color: #454039; }
+
+.footer-abs { position: absolute; bottom: 0; }
+
+.footer__container { display: flex; align-items: center; justify-content: space-between; height: 100%; position: relative; color: white; }
+
+.footer__container > a { color: white; text-decoration: none; }
+
+.footer__container > a:hover { color: blue; }
+
+.footer__about { display: flex; align-items: flex-start; justify-content: center; flex-direction: column; height: 100%; width: 25%; margin-left: 5px; }
+
+.footer__about p { font-size: 0px; padding: 5px; }
+
+@media screen and (min-width: 520px) { .footer__about p { font-size: clamp(12px, 1vh, 32px); } }
+
+@media screen and (min-width: 768px) { .footer__about p:first-child { font-size: clamp(16px, 2vh, 32px); } }
+
+@media screen and (min-width: 768px) { .footer__about p:last-child { font-size: clamp(12px, 1vh, 24px); } }
+
+.footer__share { display: flex; align-items: center; justify-content: center; position: absolute; left: 0; right: 0; height: 100%; margin: auto; }
+
+@media screen and (min-width: 520px) { .footer__share { padding-bottom: 15px; } }
+
+.footer__share > a { display: flex; align-items: center; justify-content: center; text-decoration: none; height: clamp(35px, 4vh, 70px); width: clamp(35px, 4vh, 70px); margin: auto 5px; color: white; border: 1px solid white; border-radius: 50%; }
+
+@media screen and (min-width: 520px) { .footer__share > a { height: clamp(35px, 3vh, 70px); width: clamp(35px, 3vh, 70px); margin: auto 10px; } }
+
+.footer__share > a > i { font-size: clamp(20px, 2vh, 40px); }
+
+.footer__share img { height: 100%; }
+
+.footer__contact { height: fit-content; background-color: white; border: 2px solid white; border-radius: 5px; margin-right: 10px; }
+
+@media screen and (min-width: 520px) { .footer__contact { width: fit-content; } }
+
+.footer__contact > a { display: block; padding: 10px; color: white; background-color: #2660a1; text-decoration: none; border-radius: 5px; }
+
+.footer__contact > a:hover { cursor: pointer; opacity: 0.9; }
+
+.footer__contact i { font-size: clamp(16px, 2vh, 32px); }
+
+@media screen and (min-width: 520px) { .footer__contact i { display: none; padding-right: 4px; } }
+
+.footer__contact span { display: none; }
+
+@media screen and (min-width: 520px) { .footer__contact span { display: inline-block; font-size: clamp(12px, 1.5vh, 20px); } }
+
+@media screen and (min-width: 768px) { .footer__contact span { font-size: clamp(16px, 2vh, 32px); } }
+
+.footer__copyright { display: none; position: absolute; bottom: 3px; left: 50%; transform: translate(-50%, -50%); font-size: 10px; }
+
+@media screen and (min-width: 520px) { .footer__copyright { display: block; } }
+
+.footer__copyright a { color: white; text-decoration: none; }
+
+.footer__copyright a:hover { color: blue; }
+
+.nav { background-image: url("/static/media/rice_paper6.png"); border-bottom: 2px solid #f37f27; }
+
+@media screen and (min-width: 768px) { .nav { padding-bottom: 10px; } }
+
+.nav__container { position: relative; }
+
+.nav a { letter-spacing: 5px; color: #f37f27; text-decoration: none; }
+
+.nav__title { font-size: clamp(16px, 4vh, 80px); font-style: oblique; margin: auto; display: flex; align-items: center; justify-content: center; padding: clamp(2px, 1vh, 10px); }
+
+.nav__setting-button { border: 1px solid #968b76; border-radius: 5px; color: gray; height: clamp(30px, 4vh, 100px); width: clamp(30px, 4vh, 100px); margin-right: 10px; }
+
+.nav__setting-button i { font-size: clamp(16px, 2.5vh, 48px); }
+
+.nav__setting-button:hover { cursor: pointer; }
+
+.nav__setting-container { position: absolute; top: 5px; right: 0; }
+
+.nav__setting-window { display: none; position: absolute; width: clamp(200px, 20vmax, 400px); top: 40px; right: 25px; border-radius: 5px; background-color: white; box-shadow: 0 5px 10px 0 gray; z-index: 100; }
+
+.nav__setting-window ul { list-style-type: none; padding: clamp(5px, 1vmax, 15px); }
+
+.nav__setting-window li { text-decoration: none; }
+
+.nav__setting-window li:last-child { border-top: 1px solid gray; text-align: center; }
+
+.nav__setting-window i { font-size: clamp(20px, 2vh, 40px); padding-right: 5px; }
+
+.nav__setting-window a { display: flex; align-items: center; justify-content: center; position: relative; height: clamp(34px, 4vmax, 68px); color: black; font-size: clamp(14px, 1.5vh, 28px); text-decoration: none; padding: 7px 7px 7px 7px; z-index: 10; }
+
+.nav__setting-window a:hover { color: #ee793a; }
+
+.nav__search-form { display: none; width: 150px; margin-right: 100px; z-index: 100000; }
+
+.nav__search-button { display: none; height: 100%; padding: 5px 10px; border-radius: 5px; }
+
+.nav__search-input { font-size: 12px; height: 30px; width: 100%; padding-left: 20px; border: 1px solid gray; border-radius: 5px; font-family: FontAwesome; -webkit-appearance: textfield; }
+
+/*# sourceMappingURL=styles.css.map */

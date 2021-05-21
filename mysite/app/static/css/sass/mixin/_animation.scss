@@ -1,0 +1,60 @@
+.success {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    // background-image: url("/static/media/success.gif");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: 50px;
+    z-index: 10000;
+    p {
+        font-size: 30px;
+    }
+}
+
+/*下から上にフェードイン*/
+.down-to-top {
+    opacity: 0;
+    transform: translateY(10%);
+    transition: all 1.5s;
+
+    &.scrollin {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/*フェードインアニメ*/
+/*左から右にフェードイン*/
+.left-to-right {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: all 1.5s;
+
+    &.scrollin {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+.loading {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    background-image: url("/static/media/loading.gif");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+    background-size: 50px;
+    z-index: 10000;
+}

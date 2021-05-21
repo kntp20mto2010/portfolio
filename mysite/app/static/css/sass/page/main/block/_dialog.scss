@@ -1,0 +1,146 @@
+.dialog {
+    display: none;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background-color: rgba(100, 100, 100, 0.7);
+    &__close-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 30px;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    &__wrapper {
+        display: table;
+        margin: auto;
+        max-width: 740px;
+    }
+    &__container {
+        display: flex;
+        flex-direction: column;
+
+        @include mq() {
+            flex-direction: row;
+        }
+        margin: auto;
+        max-height: 840px;
+        max-width: 840px;
+    }
+    &__image {
+        min-width: 500px;
+        height: 360px;
+        @include mq() {
+            width: 510px;
+            // max-height: 600px;
+            height: 540px;
+        }
+        // 左下を丸める
+        background-color: gray;
+        border-radius: 0 0 0 10px;
+    }
+    &__comment-container {
+        background-color: white;
+        border-radius: 0 0 10px 10px;
+        @include mq() {
+            position: relative;
+            min-width: 230px;
+            max-width: 330px;
+            border-radius: 0 0 10px 0;
+        }
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+
+        @include mq() {
+            position: absolute;
+        }
+
+        bottom: 0;
+
+        width: 100%;
+    }
+    &__submit {
+        height: 30px;
+        font-size: 16px;
+        color: #0095f6;
+        font-weight: bold;
+        &:hover {
+            color: #0085dd;
+            background-color: lightgray;
+            cursor: pointer;
+        }
+        border-radius: 0 0 10px 10px;
+        @include mq() {
+            border-radius: 0 0 10px 0;
+        }
+    }
+    input {
+        display: none;
+    }
+    &__comment {
+        bottom: 0;
+        width: 100%;
+
+        min-height: 180px;
+        max-height: 380px;
+        resize: none;
+    }
+
+    &__title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        color: white;
+        background-color: $color-main;
+        font-size: 26px;
+        font-family: "Courier New", Courier, monospace;
+        height: 50px;
+        width: 100%;
+        text-align: center;
+        // 左上と右上を丸める
+        border-radius: 10px 10px 0 0;
+    }
+    &__friends {
+        padding: 10px 0px 10px 5px;
+    }
+    &__friend {
+        &-profile {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+        &-button {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            padding: 0;
+            margin-right: 10px;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+        &-image {
+            height: 100%;
+            width: 100%;
+            border: 2px solid $color-main;
+            border-radius: 50%;
+        }
+        &-comment {
+            height: 100px;
+            width: 100%;
+            padding-left: 20px;
+        }
+        &-name {
+            font-size: 12px;
+            font-weight: bold;
+        }
+    }
+}
